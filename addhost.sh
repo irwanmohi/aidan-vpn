@@ -15,12 +15,12 @@ clear
 sleep 0.5
 clear
 apt install jq curl -y
-DOMAIN=redfoxvpn.xyz
+DOMAIN=aidan.my
 Bug=$bughost
 sub=$(</dev/urandom tr -dc a-z0-9 | head -c4)
-SUB_DOMAIN=${Bug}.${sub}.redfoxvpn.xyz
-CF_ID=faizalazrony93@gmail.com
-CF_KEY=c482a5e41168e7e53cc170b1d5b4a32755914
+SUB_DOMAIN=${Bug}.${sub}.aidan.my
+CF_ID=aidan@aidan.my
+CF_KEY=5rjBtAtxrznicuGyFuI5fP7TZGistqD97UDLbKwS
 set -euo pipefail
 IP=$(wget -qO- icanhazip.com);
 echo "Updating DNS for ${SUB_DOMAIN}..."
