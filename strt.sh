@@ -14,5 +14,5 @@ data=( `cat /etc/wireguard/wg0.conf | grep '^### Client' | cut -d ' ' -f 3`);
 now=`date +"%Y-%m-%d"`
 for user in "${data[@]}"
 do
-chmod 777 /home/vpn/public_html/$user.conf
+chmod 777 /home/vps/public_html/$user.conf
 done

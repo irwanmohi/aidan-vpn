@@ -2,7 +2,7 @@
 # Debian 9 & 10 64bit
 # Ubuntu 18.04 & 20.04 bit
 # Centos 7 & 8 64bit 
-# By Irwan Mohi
+# By Badboy
 # ==================================================
 
 
@@ -23,7 +23,7 @@ if [[ -e /etc/wireguard/params ]]; then
 	exit 1
 fi
 
-echo -e "${Info} Wireguard VPS AutoScript by Irwan Mohi"
+echo -e "${Info} Wireguard VPS AutoScript by Badboy"
 # Detect public IPv4 address and pre-fill for the user
 
 # Detect public interface and pre-fill for the user
@@ -89,11 +89,11 @@ WG_RUNNING=$?
 
 # Tambahan
 cd /usr/bin
-wget -O addwg "https://raw.githubusercontent.com/irwanmohi/AutoScriptSSH/main/addwg.sh"
-wget -O delwg "https://raw.githubusercontent.com/irwanmohi/AutoScriptSSH/main/delwg.sh"
-wget -O cekwg "https://raw.githubusercontent.com/irwanmohi/AutoScriptSSH/main/cekwg.sh"
-wget -O xp-wg "https://raw.githubusercontent.com/irwanmohi/AutoScriptSSH/main/xp-wg.sh"
-wget -O renewwg "https://raw.githubusercontent.com/irwanmohi/AutoScriptSSH/main/renewwg.sh"
+wget -O addwg "https://raw.githubusercontent.com/irwanmohi/aidan-vpn/new/main/addwg.sh"
+wget -O delwg "https://raw.githubusercontent.com/irwanmohi/aidan-vpn/main/delwg.sh"
+wget -O cekwg "https://raw.githubusercontent.com/irwanmohi/aidan-vpn/main/cekwg.sh"
+wget -O xp-wg "https://raw.githubusercontent.com/irwanmohi/aidan-vpn/new/main/xp-wg.sh"
+wget -O renewwg "https://raw.githubusercontent.com/irwanmohi/aidan-vpn/main/renewwg.sh"
 chmod +x addwg
 chmod +x delwg
 chmod +x cekwg

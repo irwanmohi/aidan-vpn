@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-# By Irwan Mohi
+# By Badboy
 # ==================================================
 
 # initialisasi var
@@ -19,7 +19,7 @@ cp /etc/openvpn/easy-rsa/vars.example /etc/openvpn/easy-rsa/vars
 
 # Kemudian edit file variabel easy-rsa
 # nano /etc/openvpn/easy-rsa/vars
-wget -O /etc/openvpn/easy-rsa/vars "https://raw.githubusercontent.com/irwanmohi/AutoScriptSSH/main/vars.conf"
+wget -O /etc/openvpn/easy-rsa/vars "https://raw.githubusercontent.com/lanundarat87/new/main/vars.conf"
 # edit projek export KEY_NAME="vpn"
 # Save dan keluar dari editor
 
@@ -27,7 +27,7 @@ wget -O /etc/openvpn/easy-rsa/vars "https://raw.githubusercontent.com/irwanmohi/
 openssl dhparam -out /etc/openvpn/dh2048.pem 2048
 
 # install openvpn
-wget -O /etc/openvpn/vpn.zip "https://github.com/irwanmohi/AutoScriptSSH/raw/main/vpn.zip"
+wget -O /etc/openvpn/vpn.zip "https://raw.githubusercontent.com/lanundarat87/new/main/main/vpn.zip"
 cd /etc/openvpn/
 unzip vpn.zip
 rm -f vpn.zip
@@ -39,8 +39,8 @@ port 1194
 proto tcp
 dev tun
 ca ca.crt
-cert EMBEX.crt
-key EMBEX.key
+cert badboy.crt
+key badboy.key
 dh dh2048.pem
 plugin /usr/lib/openvpn/openvpn-plugin-auth-pam.so login
 verify-client-cert none
@@ -54,7 +54,7 @@ keepalive 5 30
 comp-lzo
 persist-key
 persist-tun
-status EMBEX-tcp-1194.log
+status redfoxvpn-tcp-1194.log
 verb 3
 END
 
@@ -64,8 +64,8 @@ port 2200
 proto udp
 dev tun
 ca ca.crt
-cert EMBEX.crt
-key EMBEX.key
+cert badboy.crt
+key badboy.key
 dh dh2048.pem
 plugin /usr/lib/openvpn/openvpn-plugin-auth-pam.so login
 verify-client-cert none
@@ -79,7 +79,7 @@ keepalive 5 30
 comp-lzo
 persist-key
 persist-tun
-status EMBEX-udp-2200.log
+status redfoxvpn-udp-2200.log
 verb 3
 END
 
@@ -104,15 +104,12 @@ sed -i 's/#net.ipv4.ip_forward=1/net.ipv4.ip_forward=1/g' /etc/sysctl.conf
 
 # Konfigurasi dan Setting untuk Client
 mkdir clientconfig
-cp /etc/openvpn/{Irwan Mohi.crt,EMBEX.key,ca.crt,ta.key} clientconfig/
+cp /etc/openvpn/{badboy.crt,badboy.key,ca.crt,ta.key} clientconfig/
 cd clientconfig
 
 # Buat config client UDP 1194
 cd /etc/openvpn
 cat > /etc/openvpn/client-udp-1194.ovpn <<-END
-############## WELCOME TO ###############
-########## WWW.EMBEX.ONLINE ###########
-####### DONT FORGET TO SUPPORT US #######
 client
 dev tun
 proto udp
@@ -131,9 +128,6 @@ sed -i $MYIP2 /etc/openvpn/client-udp-1194.ovpn;
 
 # Buat config client TCP 1194
 cat > /etc/openvpn/client-tcp-1194.ovpn <<-END
-############## WELCOME TO ###############
-########## WWW.EMBEX.ONLINE ###########
-####### DONT FORGET TO SUPPORT US #######
 client
 dev tun
 proto tcp
@@ -152,9 +146,6 @@ sed -i $MYIP2 /etc/openvpn/client-tcp-1194.ovpn;
 
 # Buat config client UDP 2200
 cat > /etc/openvpn/client-udp-2200.ovpn <<-END
-############## WELCOME TO ###############
-########## WWW.EMBEX.ONLINE ###########
-####### DONT FORGET TO SUPPORT US #######
 client
 dev tun
 proto udp
@@ -173,9 +164,6 @@ sed -i $MYIP2 /etc/openvpn/client-udp-2200.ovpn;
 
 # Buat config client TCP 2200
 cat > /etc/openvpn/client-tcp-2200.ovpn <<-END
-############## WELCOME TO ###############
-########## WWW.EMBEX.ONLINE ###########
-####### DONT FORGET TO SUPPORT US #######
 client
 dev tun
 proto tcp
@@ -194,9 +182,6 @@ sed -i $MYIP2 /etc/openvpn/client-tcp-2200.ovpn;
 
 # Buat config client SSL
 cat > /etc/openvpn/client-tcp-ssl.ovpn <<-END
-############## WELCOME TO ###############
-########## WWW.EMBEX.ONLINE ###########
-####### DONT FORGET TO SUPPORT US #######
 client
 dev tun
 proto tcp
@@ -223,7 +208,7 @@ cat /etc/openvpn/ca.crt >> /etc/openvpn/client-tcp-1194.ovpn
 echo '</ca>' >> /etc/openvpn/client-tcp-1194.ovpn
 
 # Copy config OpenVPN client ke home directory root agar mudah didownload ( TCP 1194 )
-cp /etc/openvpn/client-tcp-1194.ovpn /home/vpn/public_html/client-tcp-1194.ovpn
+cp /etc/openvpn/client-tcp-1194.ovpn /home/vps/public_html/client-tcp-1194.ovpn
 
 # masukkan certificatenya ke dalam config client UDP 2200
 echo '<ca>' >> /etc/openvpn/client-udp-2200.ovpn
@@ -231,7 +216,7 @@ cat /etc/openvpn/ca.crt >> /etc/openvpn/client-udp-2200.ovpn
 echo '</ca>' >> /etc/openvpn/client-udp-2200.ovpn
 
 # Copy config OpenVPN client ke home directory root agar mudah didownload ( UDP 2200 )
-cp /etc/openvpn/client-udp-2200.ovpn /home/vpn/public_html/client-udp-2200.ovpn
+cp /etc/openvpn/client-udp-2200.ovpn /home/vps/public_html/client-udp-2200.ovpn
 
 # masukkan certificatenya ke dalam config client SSL
 echo '<ca>' >> /etc/openvpn/client-tcp-ssl.ovpn
@@ -239,7 +224,7 @@ cat /etc/openvpn/ca.crt >> /etc/openvpn/client-tcp-ssl.ovpn
 echo '</ca>' >> /etc/openvpn/client-tcp-ssl.ovpn
 
 # Copy config OpenVPN client ke home directory root agar mudah didownload ( SSL )
-cp /etc/openvpn/client-tcp-ssl.ovpn /home/vpn/public_html/client-tcp-ssl.ovpn
+cp /etc/openvpn/client-tcp-ssl.ovpn /home/vps/public_html/client-tcp-ssl.ovpn
 
 #firewall untuk memperbolehkan akses UDP dan akses jalur TCP
 

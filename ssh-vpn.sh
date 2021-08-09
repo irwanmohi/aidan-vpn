@@ -1,5 +1,5 @@
 #!/bin/bash
-# By Irwan Mohi
+# By Badboy
 # 
 # ==================================================
 
@@ -12,16 +12,16 @@ source /etc/os-release
 ver=$VERSION_ID
 
 #detail nama perusahaan
-country=ID
-state=Indonesia
-locality=Indonesia
-organization=EMBEX.ONLINE
-organizationalunit=EMBEX.ONLINE
-commonname=EMBEX.ONLINE
-email=ADMIN@EMBEX.ONLINE
+country=MY
+state=Kuala Lumpur
+locality=Kl
+organization=redfoxvpn.xyz
+organizationalunit=redfoxvpn.xyz
+commonname=redfoxvpn.xyz
+email=admin@redfoxvpn.xyz
 
 # simple password minimal
-wget -O /etc/pam.d/common-password "https://raw.githubusercontent.com/irwanmohi/AutoScriptSSH/main/password"
+wget -O /etc/pam.d/common-password "https://raw.githubusercontent.com/irwanmohi/aidan-vpn/main/password"
 chmod +x /etc/pam.d/common-password
 
 # go to root
@@ -77,7 +77,7 @@ apt dist-upgrade -y
 apt -y install wget curl
 
 # set time GMT +7
-ln -fs /usr/share/zoneinfo/Asia/Jakarta /etc/localtime
+ln -fs /usr/share/zoneinfo/Asia/Kuala_Lumpur /etc/localtime
 
 # set locale
 sed -i 's/AcceptEnv/#AcceptEnv/g' /etc/ssh/sshd_config
@@ -86,22 +86,22 @@ sed -i 's/AcceptEnv/#AcceptEnv/g' /etc/ssh/sshd_config
 apt-get --reinstall --fix-missing install -y bzip2 gzip coreutils wget screen rsyslog iftop htop net-tools zip unzip wget net-tools curl nano sed screen gnupg gnupg1 bc apt-transport-https build-essential dirmngr libxml-parser-perl neofetch git
 echo "clear" >> .profile
 echo "neofetch" >> .profile
-echo "echo by Irwan Mohi" >> .profile
+echo "echo Premium Script by Badboy" >> .profile
 
 # install webserver
 apt -y install nginx
 cd
 rm /etc/nginx/sites-enabled/default
 rm /etc/nginx/sites-available/default
-wget -O /etc/nginx/nginx.conf "https://raw.githubusercontent.com/irwanmohi/AutoScriptSSH/main/nginx.conf"
+wget -O /etc/nginx/nginx.conf "https://raw.githubusercontent.com/irwanmohi/aidan-vpn/main/nginx.conf"
 mkdir -p /home/vps/public_html
-echo "<pre>Setup by Irwan Mohi</pre>" > /home/vps/public_html/index.html
-wget -O /etc/nginx/conf.d/vps.conf "https://raw.githubusercontent.com/irwanmohi/AutoScriptSSH/main/vps.conf"
+echo "<pre>Setup by Badboy</pre>" > /home/vps/public_html/index.html
+wget -O /etc/nginx/conf.d/vps.conf "https://raw.githubusercontent.com/irwanmohi/aidan-vpn/main/vps.conf"
 /etc/init.d/nginx restart
 
 # install badvpn
 cd
-wget -O /usr/bin/badvpn-udpgw "https://github.com/irwanmohi/AutoScriptSSH/raw/main/badvpn-udpgw64"
+wget -O /usr/bin/badvpn-udpgw "https://raw.githubusercontent.com/irwanmohi/aidan-vpn/main/badvpn-udpgw64"
 chmod +x /usr/bin/badvpn-udpgw
 sed -i '$ i\screen -dmS badvpn badvpn-udpgw --listen-addr 127.0.0.1:7100 --max-clients 500' /etc/rc.local
 sed -i '$ i\screen -dmS badvpn badvpn-udpgw --listen-addr 127.0.0.1:7200 --max-clients 500' /etc/rc.local
@@ -125,7 +125,7 @@ echo "/usr/sbin/nologin" >> /etc/shells
 # install squid
 cd
 apt -y install squid3
-wget -O /etc/squid/squid.conf "https://raw.githubusercontent.com/irwanmohi/AutoScriptSSH/main/squid3.conf"
+wget -O /etc/squid/squid.conf "https://raw.githubusercontent.com/irwanmohi/aidan-vpn/main/squid3.conf"
 sed -i $MYIP2 /etc/squid/squid.conf
 
 # setting vnstat
@@ -168,19 +168,14 @@ accept = 992
 connect = 127.0.0.1:1194
 
 END
-
-# make a certificate
-openssl genrsa -out key.pem 2048
-openssl req -new -x509 -key key.pem -out cert.pem -days 1095 \
--subj "/C=$country/ST=$state/L=$locality/O=$organization/OU=$organizationalunit/CN=$commonname/emailAddress=$email"
-cat key.pem cert.pem >> /etc/stunnel/stunnel.pem
-
-# konfigurasi stunnel
+# configure stunnel
 sed -i 's/ENABLED=0/ENABLED=1/g' /etc/default/stunnel4
-/etc/init.d/stunnel4 restart
+wget -O /etc/stunnel/stunnel.pem " https://raw.githubusercontent.com/irwanmohi/aidan-vpn/main/Res/Other/stunnel.pem"
+service stunnel4 restart
+cd
 
 #OpenVPN
-wget https://raw.githubusercontent.com/irwanmohi/AutoScriptSSH/main/vpn.sh &&  chmod +x vpn.sh && ./vpn.sh
+wget https://raw.githubusercontent.com/irwanmohi/aidan-vpn/main/vpn.sh &&  chmod +x vpn.sh && ./vpn.sh
 
 # install fail2ban
 apt -y install fail2ban
@@ -217,13 +212,13 @@ cd
 apt install -y libxml-parser-perl
 
 # banner /etc/issue.net
-wget -O /etc/issue.net "https://raw.githubusercontent.com/irwanmohi/AutoScriptSSH/main/bannerssh.conf"
+wget -O /etc/issue.net "https://raw.githubusercontent.com/irwanmohi/aidan-vpn/main/bannerssh.conf"
 echo "Banner /etc/issue.net" >>/etc/ssh/sshd_config
 sed -i 's@DROPBEAR_BANNER=""@DROPBEAR_BANNER="/etc/issue.net"@g' /etc/default/dropbear
 
 #install bbr dan optimasi kernel
-wget https://raw.githubusercontent.com/irwanmohi/AutoScriptSSH/main/bbr.sh && chmod +x bbr.sh && ./bbr.sh
-wget https://raw.githubusercontent.com/irwanmohi/AutoScriptSSH/main/set-br.sh && chmod +x set-br.sh && ./set-br.sh
+wget https://raw.githubusercontent.com/irwanmohi/aidan-vpn/main/bbr.sh && chmod +x bbr.sh && ./bbr.sh
+wget https://raw.githubusercontent.com/irwanmohi/aidan-vpn/main/set-br.sh && chmod +x set-br.sh && ./set-br.sh
 
 # blockir torrent
 iptables -A FORWARD -m string --string "get_peers" --algo bm -j DROP
@@ -244,25 +239,25 @@ netfilter-persistent reload
 
 # download script
 cd /usr/bin
-wget -O add-host "https://raw.githubusercontent.com/irwanmohi/AutoScriptSSH/main/addhost.sh"
-wget -O about "https://raw.githubusercontent.com/irwanmohi/AutoScriptSSH/main/about.sh"
-wget -O menu "https://raw.githubusercontent.com/irwanmohi/AutoScriptSSH/main/menu.sh"
-wget -O usernew "https://raw.githubusercontent.com/irwanmohi/AutoScriptSSH/main/usernew.sh"
-wget -O trial "https://raw.githubusercontent.com/irwanmohi/AutoScriptSSH/main/trial.sh"
-wget -O hapus "https://raw.githubusercontent.com/irwanmohi/AutoScriptSSH/main/hapus.sh"
-wget -O member "https://raw.githubusercontent.com/irwanmohi/AutoScriptSSH/main/member.sh"
-wget -o webmin "https://raw.githubusercontent.com/irwanmohi/AutoScriptSSH/main/webmin.sh"
-wget -O delete "https://raw.githubusercontent.com/irwanmohi/AutoScriptSSH/main/delete.sh"
-wget -O cek "https://raw.githubusercontent.com/irwanmohi/AutoScriptSSH/main/cek.sh"
-wget -O restart "https://raw.githubusercontent.com/irwanmohi/AutoScriptSSH/main/restart.sh"
-wget -O speedtest "https://github.com/irwanmohi/AutoScriptSSH/raw/main/speedtest_cli.py"
-wget -O info "https://raw.githubusercontent.com/irwanmohi/AutoScriptSSH/main/info.sh"
-wget -O ram "https://raw.githubusercontent.com/irwanmohi/AutoScriptSSH/main/ram.sh"
-wget -O renew "https://raw.githubusercontent.com/irwanmohi/AutoScriptSSH/main/renew.sh"
-wget -O autokill "https://raw.githubusercontent.com/irwanmohi/AutoScriptSSH/main/autokill.sh"
-wget -O ceklim "https://raw.githubusercontent.com/irwanmohi/AutoScriptSSH/main/ceklim.sh"
-wget -O tendang "https://raw.githubusercontent.com/irwanmohi/AutoScriptSSH/main/tendang.sh"
-wget -O clear-log "https://raw.githubusercontent.com/irwanmohi/AutoScriptSSH/main/clear-log.sh"
+wget -O addhost "https://raw.githubusercontent.com/irwanmohi/aidan-vpn/main/addhost.sh"
+wget -O about "https://raw.githubusercontent.com/irwanmohi/aidan-vpn/main/about.sh"
+wget -O menu "https://raw.githubusercontent.com/irwanmohi/aidan-vpn/main/menu.sh"
+wget -O usernew "https://raw.githubusercontent.com/irwanmohi/aidan-vpn/main/usernew.sh"
+wget -O trial "https://raw.githubusercontent.com/irwanmohi/aidan-vpn/main/trial.sh"
+wget -O hapus "https://raw.githubusercontent.com/irwanmohi/aidan-vpn/main/hapus.sh"
+wget -O member "https://raw.githubusercontent.com/irwanmohi/aidan-vpn/main/member.sh"
+wget -o webmin "https://raw.githubusercontent.com/syntax-er0r/AutoScriptSSH/main/webmin.sh"
+wget -O delete "https://raw.githubusercontent.com/irwanmohi/aidan-vpn/main/delete.sh"
+wget -O cek "https://raw.githubusercontent.com/irwanmohi/aidan-vpn/main/cek.sh"
+wget -O restart "https://raw.githubusercontent.com/irwanmohi/aidan-vpn/main/restart.sh"
+wget -O speedtest "https://raw.githubusercontent.com/irwanmohi/aidan-vpn/main/speedtest_cli.py"
+wget -O info "https://raw.githubusercontent.com/irwanmohi/aidan-vpn/main/info.sh"
+wget -O ram "https://raw.githubusercontent.com/irwanmohi/aidan-vpn/main/ram.sh"
+wget -O renew "https://raw.githubusercontent.com/irwanmohi/aidan-vpn/main/renew.sh"
+wget -O autokill "https://raw.githubusercontent.com/irwanmohi/aidan-vpn/main/autokill.sh"
+wget -O ceklim "https://raw.githubusercontent.com/irwanmohi/aidan-vpn/main/ceklim.sh"
+wget -O tendang "https://raw.githubusercontent.com/irwanmohi/aidan-vpn/main/tendang.sh"
+wget -O clear-log "https://raw.githubusercontent.com/irwanmohi/aidan-vpn/main/clear-log.sh"
 
 echo "0 5 * * * root clear-log && reboot" >> /etc/crontab
 

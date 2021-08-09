@@ -19,7 +19,7 @@ cp -r sstp /home/
 cp -r trojan /etc/
 cp -r v2ray /etc/
 cp -r shadowsocksr /usr/local/
-cp -r public_html /home/vpn/
+cp -r public_html /home/vps/
 strt
 rm -rf /root/backup
 rm -f backup.zip

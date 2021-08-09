@@ -1,11 +1,11 @@
 #!/bin/bash
-# Script by : Irwan Mohi
-clear
+reset
+echo -e "\e[1;33m==============================================================="
+echo -e "\e[1;36m                    AutoScriptVPS by  Badboy                   "
+echo -e "\e[1;36m                           Redfox VPN                          "
+echo -e "\e[1;33m==============================================================="
 echo -e ""
 echo -e "======================================"
-echo -e ""
-echo -e "     AutoScriptVPS by Irwan Mohi      "
-echo -e ""
 echo -e "     [1]  AutoKill After 5 Minutes"
 echo -e "     [2]  AutoKill After 15 Minutes"
 echo -e "     [3]  AutoKill After 30 Minutes"
@@ -24,7 +24,7 @@ case $AutoKill in
                 echo "*/5 * * * *  root /usr/bin/tendang" > /etc/cron.d/tendang
                 echo -e ""
                 echo -e "======================================"
-                echo -e "      AutoScriptVPS by Irwan Mohi     "
+                echo -e "      AutoScriptVPS by Badboy     "
                 echo -e ""
                 echo -e "      Allowed MultiLogin : 2"
                 echo -e "      AutoKill Every     : 5 Minutes"      
@@ -41,7 +41,7 @@ case $AutoKill in
                 echo -e ""
                 echo -e "======================================"
                 echo -e ""
-                echo -e "      AutoScriptVPS by Irwan Mohi     "
+                echo -e "      AutoScriptVPS by Badboy     "
                 echo -e ""
                 echo -e "      Allowed MultiLogin : 2"
                 echo -e "      AutoKill Every     : 15 Minutes"
@@ -58,7 +58,7 @@ case $AutoKill in
                 echo -e ""
                 echo -e "======================================"
                 echo -e ""
-                echo -e "      AutoScriptVPS by Irwan Mohi     "
+                echo -e "      AutoScriptVPS by Badboy     "
                 echo -e ""
                 echo -e "      Allowed MultiLogin : 2"
                 echo -e "      AutoKill Every     : 30 Minutes"
@@ -72,7 +72,7 @@ case $AutoKill in
                 echo -e ""
                 echo -e "======================================"
                 echo -e ""
-                echo -e "      AutoScriptVPS by Irwan Mohi     "
+                echo -e "      AutoScriptVPS by Badboy     "
                 echo -e ""
                 echo -e "      AutoKill MultiLogin Turned Off  "
                 echo -e ""

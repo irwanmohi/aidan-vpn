@@ -1,5 +1,5 @@
 #!/bin/bash
-# Script by : Irwan Mohi
+# Script by : redfoxvpn
 #!/bin/bash
 clear
 MAX=2

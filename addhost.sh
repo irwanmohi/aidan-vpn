@@ -1,10 +1,26 @@
 #!/bin/bash
+reset
+echo -e "\e[1;33m==============================================================="
+echo -e "\e[1;36m                    AutoScriptVPS by  Badboy                   "
+echo -e "\e[1;36m                           Redfox VPN                          "
+echo -e "\e[1;33m==============================================================="
+read -p "bug : " bughost
+IP=$(wget -qO- icanhazip.com);
+sleep 1
+echo Ping Host
+echo Cek Hak Akses...
+sleep 0.5
+echo Permission Accepted
+clear
+sleep 0.5
+clear
 apt install jq curl -y
-DOMAIN=aidan.my
+DOMAIN=redfoxvpn.xyz
+Bug=$bughost
 sub=$(</dev/urandom tr -dc a-z0-9 | head -c4)
-SUB_DOMAIN=${sub}.aidan.my
-CF_ID=aidan@aidan.com.my
-CF_KEY=o1JaXp9RgNcejIeoXaF8w6BuWaXZNr_DNA3GH4QT
+SUB_DOMAIN=${Bug}.${sub}.redfoxvpn.xyz
+CF_ID=faizalazrony93@gmail.com
+CF_KEY=c482a5e41168e7e53cc170b1d5b4a32755914
 set -euo pipefail
 IP=$(wget -qO- icanhazip.com);
 echo "Updating DNS for ${SUB_DOMAIN}..."
@@ -17,7 +33,8 @@ RECORD=$(curl -sLX GET "https://api.cloudflare.com/client/v4/zones/${ZONE}/dns_r
      -H "X-Auth-Email: ${CF_ID}" \
      -H "X-Auth-Key: ${CF_KEY}" \
      -H "Content-Type: application/json" | jq -r .result[0].id)
-
+sleep 0.2
+clear
 if [[ "${#RECORD}" -le 10 ]]; then
      RECORD=$(curl -sLX POST "https://api.cloudflare.com/client/v4/zones/${ZONE}/dns_records" \
      -H "X-Auth-Email: ${CF_ID}" \

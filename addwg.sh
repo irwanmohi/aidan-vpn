@@ -1,5 +1,10 @@
 #!/bin/bash
 # Load params
+reset
+echo -e "\e[1;33m==============================================================="
+echo -e "\e[1;36m                    AutoScriptVPS by  Badboy                   "
+echo -e "\e[1;36m                           Redfox VPN                          "
+echo -e "\e[1;33m==============================================================="
 source /etc/wireguard/params
 source /var/lib/premium-script/ipvps.conf
 if [[ "$IP" = "" ]]; then
@@ -8,8 +13,8 @@ else
 SERVER_PUB_IP=$IP
 fi
 	echo ""
-	echo "Tell me a name for the client."
-	echo "Use one word only, no special characters."
+	echo "Sila Masukkan Nama Client."
+	echo "Hanya Satu perkataan tampa simbol."
 
 	until [[ ${CLIENT_NAME} =~ ^[a-zA-Z0-9_]+$ && ${CLIENT_EXISTS} == '0' ]]; do
 		read -rp "Client name: " -e CLIENT_NAME
@@ -17,7 +22,7 @@ fi
 
 		if [[ ${CLIENT_EXISTS} == '1' ]]; then
 			echo ""
-			echo "A client with the specified name was already created, please choose another name."
+			echo "Nama Client Telah Digunakan, Sila Pilih Nama Lain."
 			exit 1
 		fi
 	done
@@ -33,9 +38,9 @@ fi
 	fi
 
 	# Adguard DNS by default
-	CLIENT_DNS_1="176.103.130.130"
+	CLIENT_DNS_1="1.1.1.1"
 	
-	CLIENT_DNS_2="176.103.130.131"
+	CLIENT_DNS_2="1.0.0.1"
 	MYIP=$(wget -qO- ifconfig.co);
 	read -p "Expired (days): " masaaktif
 	exp=`date -d "$masaaktif days" +"%Y-%m-%d"`
@@ -79,5 +84,4 @@ AllowedIPs = $CLIENT_ADDRESS/32" >>"/etc/wireguard/$SERVER_WG_NIC.conf"
 	echo -e "==============================="
 	echo -e "Expired On     : $exp"
 	echo -e ""
-	echo -e "By Irwan Mohi"
 	rm -f /root/wg0-client-$CLIENT_NAME.conf
